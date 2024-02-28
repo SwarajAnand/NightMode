@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px 5px;
+            width: 110px;
+            position: relative;
+            border-radius: 100px;
+            margin-left: 46%;
+            background-color: black;
+            margin-top: 5%;
+            cursor: pointer;
+        }
+
+        .circleMover {
+            position: absolute;
+            width: 43px;
+            height: 43px;
+            background-color: white;
+            border-radius: 50%;
+            bottom: 8.5%;
+        }
+
+
+        .leftToRight {
+            animation-name: leftToRight;
+            animation-duration: 0.5s;
+            animation-fill-mode: forwards;
+        }
+
+        .rightToLeft {
+            animation-name: rightToLeft;
+            animation-duration: 0.5s;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes leftToRight {
+            0% {
+                left: 3px;
+            }
+
+            100% {
+                left: 60%;
+            }
+        }
+
+        @keyframes rightToLeft {
+            0% {
+                left: 60%;
+            }
+
+            100% {
+                left: 5px;
+            }
+        }
+
+
+        .toggleText {
+            text-align: center;
+            font-size: 5rem;
+            font-weight: 900;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+
+        /* Moon  */
+        .moon {
+            position: absolute;
+            display: none;
+        }
+
+        .moonDown {
+            display: block;
+            top: -100%;
+            animation-name: moonDown;
+            animation-duration: 0.7s;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes moonDown {
+            0% {
+                top: -10%;
+                right: -10%;
+            }
+
+            100% {
+                top: 60%;
+                right: 13%;
+            }
+        }
+
+        .moonUp {
+            display: block;
+            top: -10%;
+            animation-name: moonUp;
+            animation-duration: 0.7s;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes moonUp {
+            0% {
+                top: 60%;
+                right: 13%;
+            }
+
+            100% {
+                top: -100%;
+                right: -10%;
+            }
+        }
+
+        /* Sun  */
+        .sun {
+            position: absolute;
+            bottom: 30%;
+            left: 15%;
+        }
+
+        .sunUp {
+            display: block;
+            animation-name: sunUp;
+            animation-duration: 0.7s;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes sunUp {
+            0% {
+                bottom: -100%;
+                left: -10%;
+            }
+
+            100% {
+                bottom: 30%;
+                left: 15%;
+            }
+        }
+
+        .sunDown {
+            display: block;
+            /* position: absolute; */
+            animation-name: sunDown;
+            animation-duration: 0.7s;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes sunDown {
+            0% {
+                bottom: 30%;
+                left: 15%;
+            }
+
+            100% {
+                bottom: -100%;
+                left: -10%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div> <img width="42" height="42" src="https://img.icons8.com/color/48/smiling-sun.png" alt="smiling-sun" />
+        </div>
+        <div class="circleMover"></div>
+        <div><img width="42" height="42" src="https://img.icons8.com/arcade/64/crescent-moon.png" alt="crescent-moon" />
+        </div>
+    </div>
+
+
+    <p class="toggleText">Click on the Toggle Button</p>
+
+
+    <!-- Sun -->
+    <div class="sun">
+        <img width="150" height="150" src="https://img.icons8.com/skeuomorphism/128/experimental-sun-skeuomorphism.png"
+            alt="experimental-sun-skeuomorphism" />
+    </div>
+
+    <!-- Moon  -->
+    <div class="moon">
+        <img width="150" height="150" src="https://img.icons8.com/color/96/moon-satellite.png" alt="moon-satellite" />
+    </div>
+
+
+    <script>
+        const circleMover = document.querySelector(".circleMover");
+        const container = document.querySelector(".container");
+        const bodyElement = document.body;
+        const toggleText = document.querySelector(".toggleText");
+        const moon = document.querySelector(".moon");
+        const sun = document.querySelector(".sun");
+
+        let flag = false;
+        container.addEventListener("click", () => {
+            flag = !flag;
+            if (flag) {
+                circleMover.classList.add("leftToRight");
+                circleMover.classList.remove("rightToLeft");
+                bodyElement.style.backgroundColor = "black";
+                toggleText.style.color = "white";
+                container.style.backgroundColor = "rgb(34,34,34)";
+                moon.classList.add("moonDown");
+                moon.classList.remove("moonUp");
+                sun.classList.add("sunDown");
+                sun.classList.remove("sunUp");
+            } else {
+                circleMover.classList.remove("leftToRight");
+                circleMover.classList.add("rightToLeft");
+                bodyElement.style.backgroundColor = "white";
+                toggleText.style.color = "rgb(34,34,34)";
+                moon.classList.add("moonUp");
+                moon.classList.remove("moonDown");
+                sun.classList.add("sunUp");
+                sun.classList.remove("sunDown");
+            }
+        });
+    </script>
+</body>
+
+</html>
